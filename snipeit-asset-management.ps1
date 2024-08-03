@@ -212,10 +212,9 @@ function Search-ModelInSnipeIt {
 # Function to create a model in Snipe-IT
 function Create-ModelInSnipeIt {
     param (
-        [string]$ModelName
+        [string]$ModelName,
+        [int]$CategoryId
     )
-
-    $category_id = Get-CategoryId
 
     $url = "$SnipeItApiUrl/models"
     $headers = @{
@@ -223,17 +222,27 @@ function Create-ModelInSnipeIt {
         "accept"        = "application/json"
         "content-type"  = "application/json"
     }
+
+    # Start with the required fields
     $body = @{
-        category_id = $category_id
-        fieldset_id = $fieldset_id
-        name = $ModelName
-    } | ConvertTo-Json
+        category_id = $CategoryId
+        name        = $ModelName
+    }
+
+    # Conditionally add fieldset_id if it is set
+    if ($fieldset_id -ne $null -and $fieldset_id -ne 0) {
+        $body.fieldset_id = $fieldset_id
+    }
+
+    $bodyJson = $body | ConvertTo-Json
 
     try {
-        $response = Invoke-RestMethod -Uri $url -Headers $headers -Method Post -Body $body
+        $response = Invoke-RestMethod -Uri $url -Headers $headers -Method Post -Body $bodyJson
         return $response.payload.id
     } catch {
-        Write-Output "Error during creation: $_"
+        Write-Output "Error during model creation: $_"
+        Write-Output "DEBUG: URL: $url"
+        Write-Output "DEBUG: BODY: $bodyJson"
     }
 }
 

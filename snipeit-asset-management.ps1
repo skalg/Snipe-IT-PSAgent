@@ -4,6 +4,7 @@ $SnipeItApiToken = "your_api_token"
 
 # Static fields for asset creation
 $status_id = 5  # Change this to the appropriate status ID for your assets
+$fieldset_id = 1  # Change this to the appropriate fieldset ID for your models (Custom Fields)
 
 # Function to load the necessary assembly for System.Web.HttpUtility
 function Load-HttpUtilityAssembly {
@@ -224,7 +225,7 @@ function Create-ModelInSnipeIt {
     }
     $body = @{
         category_id = $category_id
-        fieldset_id = 3
+        fieldset_id = $fieldset_id
         name = $ModelName
     } | ConvertTo-Json
 

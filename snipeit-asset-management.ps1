@@ -97,7 +97,10 @@ function Get-CurrentUser {
 # Function to get the OS information
 function Get-OSInfo {
     $osInfo = (Get-WmiObject -Class Win32_OperatingSystem).Caption
-    return $osInfo
+    
+    # Remove any non-alphanumeric characters and spaces
+    $cleanedOsInfo = ($osInfo -replace '[^\w\s]', '').Trim()
+    return $cleanedOsInfo
 }
 
 # Function to get the Windows version

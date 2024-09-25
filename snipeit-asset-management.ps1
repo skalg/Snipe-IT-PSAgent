@@ -99,7 +99,14 @@ function Get-OSInfo {
     $osInfo = (Get-WmiObject -Class Win32_OperatingSystem).Caption
     
     # Remove any non-alphanumeric characters and spaces
-    $cleanedOsInfo = ($osInfo -replace '[^\w\s]', '').Trim()
+    $osInfo = ($osInfo -replace '[^\w\s]', '').Trim()
+    
+    # Replace non-breaking spaces (U+00A0) with a normal space (U+0020)
+    $osInfo = $osInfo -replace '\u00A0', ' '
+
+    # Trim leading and trailing spaces
+    $osInfo = $osInfo.Trim()
+    
     return $cleanedOsInfo
 }
 

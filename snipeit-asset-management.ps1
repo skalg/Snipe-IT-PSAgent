@@ -381,7 +381,8 @@ if ($serialNumber) {
         $modelId = Search-ModelInSnipeIt -ModelName $computerModel
 
         if (-not $modelId) {
-            $modelId = Create-ModelInSnipeIt -ModelName $computerModel
+            $categoryId = Get-CategoryId
+            $modelId = Create-ModelInSnipeIt -ModelName $computerModel -CategoryId $categoryId
         }
 
         $newAssetId = Create-AssetInSnipeIt -ModelId $modelId -SerialNumber $serialNumber -AssetName $assetName -CustomFields $customFields

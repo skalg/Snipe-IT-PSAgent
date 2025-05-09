@@ -186,35 +186,35 @@ function Get-StorageInfo {
 # Gather information for custom fields
 function Get-CustomFields {
     try {
-        # Gather data from individual functions
-        $macAddresses = Get-MacAddresses
-        $ramAmount = Get-RAMAmount
-        $cpuInfo = Get-CPUInfo
-        $currentUser = Get-CurrentUser
-        $osInfo = Get-OSInfo
-        $windowsVersion = Get-WindowsVersion
-        $buildNumber = Get-BuildNumber
-        $kernelVersion = Get-KernelVersion
-        $ipAddress = Get-ActiveIPAddress
-        $storageInfo = Get-StorageInfo
-        $hyperVVMs = Get-HyperVVMs
-        $storageType = ($storageInfo | ForEach-Object { $_.Type }) -join ", "
-        $storageCapacity = ($storageInfo | ForEach-Object { $_.Capacity }) -join ", "
+        # Gather data for each custom dbfields
+        #$macAddresses = Get-MacAddresses
+        #$ramAmount = Get-RAMAmount
+        #$cpuInfo = Get-CPUInfo
+        #$currentUser = Get-CurrentUser
+        #$osInfo = Get-OSInfo
+        #$windowsVersion = Get-WindowsVersion
+        #$buildNumber = Get-BuildNumber
+        #$kernelVersion = Get-KernelVersion
+        #$ipAddress = Get-ActiveIPAddress
+        #$storageInfo = Get-StorageInfo
+        #$hyperVVMs = Get-HyperVVMs
+        #$storageType = ($storageInfo | ForEach-Object { $_.Type }) -join ", "
+        #$storageCapacity = ($storageInfo | ForEach-Object { $_.Capacity }) -join ", "
 
-        # Validate each custom dbfield names : https://snipe-it.readme.io/reference/hardware-create
+        # Add your custom dbfield names : https://snipe-it.readme.io/reference/updating-custom-fields
         $dbFields = @{
-            "_snipeit_adresse_mac_1"   = if ($macAddresses) { $macAddresses } else { "" }
-            "_snipeit_ram_5"           = if ($ramAmount) { $ramAmount } else { "" }
-            "_snipeit_cpu_6"           = if ($cpuInfo) { $cpuInfo } else { "" }
-            "_snipeit_utilisateur_11"  = if ($currentUser) { $currentUser } else { "" }
-            "_snipeit_os_14"           = if ($osInfo) { $osInfo } else { "" }
-            "_snipeit_version_41"      = if ($windowsVersion) { $windowsVersion } else { "" }
-            "_snipeit_build_43"        = if ($buildNumber) { $buildNumber } else { "" }
-            "_snipeit_kernel_42"       = if ($kernelVersion) { $kernelVersion } else { "" }
-            "_snipeit_adresse_ipv4_18" = if ($ipAddress) { $ipAddress } else { "" }
-            "_snipeit_type_stockage_7" = if ($storageType) { $storageType } else { "" }
-            "_snipeit_capacitac_stockage_8" = if ($storageCapacity) { $storageCapacity } else { "" }
-            "_snipeit_vm_28"           = if ($hyperVVMs) { $hyperVVMs } else { "" }
+            #"_snipeit_adresse_mac_1"   = if ($macAddresses) { $macAddresses } else { "" }
+            #"_snipeit_ram_5"           = if ($ramAmount) { $ramAmount } else { "" }
+            #"_snipeit_cpu_6"           = if ($cpuInfo) { $cpuInfo } else { "" }
+            #"_snipeit_utilisateur_11"  = if ($currentUser) { $currentUser } else { "" }
+            #"_snipeit_os_14"           = if ($osInfo) { $osInfo } else { "" }
+            #"_snipeit_version_41"      = if ($windowsVersion) { $windowsVersion } else { "" }
+            #"_snipeit_build_43"        = if ($buildNumber) { $buildNumber } else { "" }
+            #"_snipeit_kernel_42"       = if ($kernelVersion) { $kernelVersion } else { "" }
+            #"_snipeit_adresse_ipv4_18" = if ($ipAddress) { $ipAddress } else { "" }
+            #"_snipeit_type_stockage_7" = if ($storageType) { $storageType } else { "" }
+            #"_snipeit_capacitac_stockage_8" = if ($storageCapacity) { $storageCapacity } else { "" }
+            #"_snipeit_vm_28"           = if ($hyperVVMs) { $hyperVVMs } else { "" }
         }
         return $dbFields
     } catch {
